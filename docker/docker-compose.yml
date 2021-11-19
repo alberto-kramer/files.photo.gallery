@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+    alpine-php:
+        build:
+          context: ..
+          dockerfile: docker/Dockerfile
+        volumes:
+          - '/mnt/nas:/data'
+        ports:
+         - 8080:8080
