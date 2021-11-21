@@ -3,7 +3,7 @@
 // CONFIG / https://forum.photo.gallery/viewtopic.php?f=66&t=9964
 // Uncomment the parameters you want to edit.
 return array (
-  'root' => '/data',
+  'root' => '/data/',
   //'start_path' => false,
   //'username' => '',
   //'password' => '',
@@ -44,11 +44,11 @@ return array (
   //'allow_symlinks' => true,
   //'history' => true,
   //'breadcrumbs' => true,
-  //'transitions' => true,
+  'transitions' => false,
   //'click' => 'popup',
   //'click_window' => '',
   //'click_window_popup' => true,
-    'code_max_load' => 500000,
+  'code_max_load' => 500000,
   //'topbar_sticky' => 'scroll',
   //'check_updates' => false,
   //'allow_tasks' => false,

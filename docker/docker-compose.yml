@@ -5,6 +5,10 @@ services:
           context: ..
           dockerfile: docker/Dockerfile
         volumes:
-          - '/mnt/nas:/data'
+          - '/mnt/nas/data/wiki/mywiki/tiddlers/r/:/data'
         ports:
-         - 8080:8080
+          - 8082:8080
+        network_mode: bridge
+        environment:
+          - VIRTUAL_HOST=upwiki.x
+          - VIRTUAL_PORT=80

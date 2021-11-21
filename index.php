@@ -537,30 +537,46 @@ function is_exclude($path = false, $is_dir = true, $symlinked = false){
 // valid root path
 function valid_root_path($path, $is_dir = false){
 
+
   // invalid
-  if($path === false) return;
+  error_log("======== 0");
+  //if($path === false) return;
+  error_log("========= 1" . $path);
   if(!$is_dir && empty($path)) return; // path cannot be empty if file
+  error_log("========= 2");
   if($path && substr($path, -1) == '/') return; // path should never be root absolute or end with /
+  error_log("========= 3");
 
   // absolute path may differ if path contains symlink
   $root_absolute = root_absolute($path);
+  error_log("========= 4");
   $real_path = real_path($root_absolute);
+  error_log("========= 5");
 
   // file does not exist
   if(!$real_path) return;
+  error_log("========= 6");
 
   // security checks if path contains symlink
   if($root_absolute !== $real_path) {
     if(strpos(($is_dir ? $path : dirname($path)), ':') !== false) return; // dir may not contain ':'
     if(strpos($path, '..') !== false) return; // path may not contain '..'
+    error_log("========= 7");
     if(is_exclude($root_absolute, $is_dir, true)) return;
   }
 
   // nope
+  error_log("========= 8");
   if(!is_readable($real_path)) return; // not readable
+  error_log("========= 9");
   if($is_dir && !is_dir($real_path)) return; // dir check
+  error_log("========= 10");
+
   if(!$is_dir && !is_file($real_path)) return; // file check
+  error_log("========= 11");
   if(is_exclude($real_path, $is_dir)) return; // exclude path
+  error_log("========= 12");
+  error_log($root_absolute);
 
   // return root_absolute
   return $root_absolute;
@@ -1308,6 +1324,7 @@ if(post('action')){
     // valid path / path must be inside assigned root
     $is_dir = post('is_dir');
     $path = valid_root_path(post('path'), $is_dir);
+    error_log("INVALID PATH=" . $path);
     if(empty($path)) json_error('invalid path ' . post('path'));
     $path = real_path($path); // in case of symlink path
 
