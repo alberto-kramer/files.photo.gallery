@@ -3,7 +3,7 @@
 // CONFIG / https://forum.photo.gallery/viewtopic.php?f=66&t=9964
 // Uncomment the parameters you want to edit.
 return array (
-  'root' => '/data/',
+  'root' => '/svr/data/',
   //'start_path' => false,
   //'username' => '',
   //'password' => '',
