@@ -1032,10 +1032,15 @@
                         if (d == e.el) return r.preventDefault();
                         e.el && e.el.classList.remove("cm-active"), e.a && e.a.classList.remove("cm-active")
                     }
+                    //U.url_path=U.url
+                    console.log("U.url="+U.url)
+                    console.log("U.clipboard="+U.clipboard)
+                    console.log("U.url_path="+U.url_path)
                     r.stopPropagation(), d === e.el && m === e.item || (a.innerHTML = '<h6 class="dropdown-header" title="' + t(m.basename) + '">' + i(m.basename) + "</h6>" + s("zoom", null, "popup", "popup" !== p && m.browser_image && m.is_readable) + s("open", null, "folder", "sidebar" !== p && m.is_dir) + s("show info", null, "modal", !["modal", "popup"].includes(p)) + function (e, t) {
                         var i = !!e && l(e);
                         return i && "#" !== i ? '<a class="' + t + '" href="' + i + '" target="_blank" data-lang="open in new tab">' + X.get("open in new tab") + "</a>" : ""
-                    }(m, "dropdown-item") + s("copy link", null, "clipboard", U.url && U.clipboard && m.url_path) + function (e, t) {
+//                    }(m, "dropdown-item") + s("copy link", null, "clipboard", U.url && U.clipboard && m.url_path) + function (e, t) {
+                    }(m, "dropdown-item") + s("copy link", null, "clipboard", true) + function (e, t) {
                         return U.download && !e.is_dir && e.is_readable ? '<a href="' + o(e, !0) + '" class="' + t + '" data-lang="download" download>' + X.get("download") + "</a>" : ""
                     }(m, "dropdown-item") + n.a(m.gps, "dropdown-item", !0) + function () {
                         if ("popup" === p) return "";
@@ -1385,6 +1390,7 @@
     }
     _c.allow_upload && P.load_plugin("uppy", (function () {
         _c.current_dir && A(_id("fm-upload"), !_c.current_dir.is_writeable);
+        console.log("Uppy SZ="+_c.upload_max_filesize)
         var e = q.uppy = new Uppy.Core({
                 restrictions: {
                     maxFileSize: _c.upload_max_filesize || null,

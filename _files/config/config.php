@@ -3,8 +3,8 @@
 // CONFIG / https://forum.photo.gallery/viewtopic.php?f=66&t=9964
 // Uncomment the parameters you want to edit.
 return array (
-  'root' => '/svr/data/',
-  //'start_path' => false,
+  'root' => '/svr/data',
+  'start_path' => '/svr/data',
   //'username' => '',
   //'password' => '',
   //'load_images' => true,
@@ -44,7 +44,7 @@ return array (
   //'allow_symlinks' => true,
   //'history' => true,
   //'breadcrumbs' => true,
-  'transitions' => false,
+  //'transitions' => true,
   //'click' => 'popup',
   //'click_window' => '',
   //'click_window_popup' => true,
@@ -69,7 +69,7 @@ return array (
   'allow_text_edit' => true,
   //'demo_mode' => false,
   //'upload_allowed_file_types' => '',
-  //'upload_max_filesize' => 0,
+  'upload_max_filesize' => 0,
   //'upload_note' => '',
   //'upload_exists' => 'increment',
   //'popup_video' => true,

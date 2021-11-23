@@ -469,6 +469,7 @@ function read_file($path, $mime = false, $msg = false, $props = false, $cache_he
   if(!$path || !file_exists($path)) return false;
   $cloned = $clone && @copy($path, $clone) ? true : false;
   //if($mime == 'image/svg') $mime .= '+xml';
+  error_log("mime=" . $mime);
   header('content-type: ' . ($mime ?: 'image/jpeg'));
 	header('content-length: ' . filesize($path));
   header('content-disposition: filename="' . basename($path) . '"');
@@ -587,7 +588,7 @@ function image_create_from($path, $type){
 
 // get file (proxy or resize image)
 function get_file($path, $resize = false){
-
+  error_log("get_file" . $path);
   // validate
   if(!$path) error('Invalid file request.', 404);
   $path = real_path($path); // in case of symlink path
@@ -1344,7 +1345,9 @@ if(post('action')){
       // invalid $_FILES['file']
       if(empty($file) || !isset($file['error']) || is_array($file['error'])) json_error('invalid $_FILES[]');
       // PHP meaningful file upload errors / https://www.php.net/manual/en/features.file-upload.errors.php
+      error_log("========== 1");
       if($file['error'] !== 0) {
+        error_log("========== 2");
         $upload_errors = array(
           1 => 'Uploaded file exceeds upload_max_filesize directive in php.ini',
           2 => 'Uploaded file exceeds MAX_FILE_SIZE directive specified in the HTML form',
@@ -1357,9 +1360,13 @@ if(post('action')){
         json_error(isset($upload_errors[$file['error']]) ? $upload_errors[$file['error']] : 'unknown error');
       }
       // invalid $file['size']
+      error_log("========== 3");
       if(!isset($file['size']) || empty($file['size'])) json_error('invalid file size');
+      error_log("========== 4");
       // $file['size'] must not exceed $config['upload_max_filesize']
       if(config::$config['upload_max_filesize'] && $file['size'] > config::$config['upload_max_filesize']) json_error('File size [' . $file['size'] . '] exceeds upload_max_filesize option [' . config::$config['upload_max_filesize'] . ']');
+      error_log("========== 5");
+
       // filename
       $filename = $file['name'];
       // security: slashes are never ever allowed in filenames / always basenamed() but just in case
